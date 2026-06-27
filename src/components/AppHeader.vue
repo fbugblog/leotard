@@ -16,6 +16,10 @@ function handleScroll() { scrolled.value = window.scrollY > 60 }
 function toggleMenu() { menuOpen.value = !menuOpen.value }
 function closeMenu() { menuOpen.value = false }
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 function smoothScroll(e, href) {
   e.preventDefault()
   closeMenu()
@@ -29,7 +33,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 <template>
   <header class="header" :class="{ scrolled }">
     <div class="inner container">
-      <a href="#" class="logo" @click.prevent="window.scrollTo({ top: 0, behavior: 'smooth' })">
+      <a href="#" class="logo" @click.prevent="scrollToTop">
         <span class="june">June</span>
         <span class="berry">BERRY</span>
       </a>
