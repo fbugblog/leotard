@@ -49,7 +49,7 @@ const LINE_URL = null  // アカウント未作成 → null の間は Coming Soo
           <div class="card__text">
             <span class="card__platform">LINE 公式</span>
             <span class="card__handle" v-if="LINE_URL">@juneberry</span>
-            <span class="card__handle coming-soon" v-else">近日公開予定</span>
+            <span class="card__handle coming-soon" v-else>近日公開予定</span>
             <span class="card__action" v-if="LINE_URL">友だち追加 →</span>
             <span class="card__action coming-label" v-else>Coming Soon</span>
           </div>
