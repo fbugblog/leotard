@@ -35,8 +35,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   <header class="header" :class="{ scrolled }">
     <div class="inner container">
       <a href="#" class="logo" @click.prevent="scrollToTop">
-        <span class="june">June</span>
-        <span class="berry">BERRY</span>
+        <span class="june">JUNE</span>
+        <span class="berry">Berry</span>
       </a>
 
       <nav class="nav" :class="{ open: menuOpen }" aria-label="メインナビゲーション">
@@ -88,18 +88,18 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
 .june {
   font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.45rem;
-  font-weight: 300;
-  color: var(--purple);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gold);
 }
 
 .berry {
   font-family: var(--font-serif);
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--gold);
+  font-style: italic;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--purple);
 }
 
 /* Nav */

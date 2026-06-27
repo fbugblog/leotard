@@ -10,7 +10,7 @@ const LINE_URL = null  // アカウント未作成 → null の間は Coming Soo
       <h2 class="display-title center">SNS で最新情報をチェック</h2>
       <p class="sub center">
         新作・期間限定カラー・大会情報・コーディネートを毎日発信中。<br>
-        フォローしてJune BERRYをもっと楽しんでください。
+        フォローしてJUNE Berryをもっと楽しんでください。
       </p>
 
       <div class="cards">

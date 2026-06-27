@@ -77,7 +77,7 @@ function sparkleStyle(n) {
     <div class="marquee-track">
       <span v-for="n in 3" :key="n">
         オーダーメイド新体操レオタード &nbsp;♡&nbsp;
-        JUNE BERRY &nbsp;♡&nbsp;
+        JUNE Berry &nbsp;♡&nbsp;
         フルオーダー / リメイク / 装飾追加 &nbsp;♡&nbsp;
         全国送料無料 &nbsp;♡&nbsp;
         制作実績150枚以上 &nbsp;♡&nbsp;

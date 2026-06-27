@@ -30,8 +30,8 @@ function smooth(e, href) {
         <!-- Brand -->
         <div class="brand">
           <p class="logo">
-            <span class="june">June</span>
-            <span class="berry">BERRY</span>
+            <span class="june">JUNE</span>
+            <span class="berry">Berry</span>
           </p>
           <p class="tagline">演技に魂を宿す、一枚。</p>
           <p class="sport">新体操専用レオタード</p>
@@ -76,7 +76,7 @@ function smooth(e, href) {
       </div>
 
       <div class="bottom">
-        <p>&copy; 2024 June BERRY. All rights reserved.</p>
+        <p>&copy; 2024 JUNE Berry. All rights reserved.</p>
         <p class="bottom-sport">新体操専用レオタード専門店</p>
       </div>
     </div>
@@ -110,18 +110,18 @@ function smooth(e, href) {
 
 .june {
   font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.8rem;
-  font-weight: 300;
-  color: var(--champagne);
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gold);
 }
 
 .berry {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--gold);
+  font-style: italic;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--gold-light);
 }
 
 .tagline {
