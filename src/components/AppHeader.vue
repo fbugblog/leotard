@@ -64,15 +64,17 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   top: 0;
   width: 100%;
   z-index: 100;
-  padding: 1.4rem 0;
-  transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+  padding: 1.2rem 0;
+  background: rgba(255, 248, 251, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(191, 78, 120, 0.1);
+  transition: box-shadow var(--transition), padding var(--transition);
 }
 
 .header.scrolled {
-  background: rgba(12, 4, 10, 0.92);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
-  padding: 0.9rem 0;
+  box-shadow: 0 2px 20px rgba(191, 78, 120, 0.1);
+  padding: 0.85rem 0;
 }
 
 .inner {
@@ -89,7 +91,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   font-style: italic;
   font-size: 1.45rem;
   font-weight: 300;
-  color: var(--champagne);
+  color: var(--purple);
 }
 
 .berry {
@@ -106,7 +108,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 .nav a {
   font-size: 0.78rem;
   letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.7);
+  color: rgba(60, 20, 40, 0.6);
   position: relative;
   padding-bottom: 3px;
   transition: color var(--transition);
@@ -139,7 +141,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 .toggle span {
   display: block;
   width: 22px; height: 1.5px;
-  background: var(--champagne);
+  background: var(--gold);
   border-radius: 2px;
   transition: transform var(--transition), opacity var(--transition);
 }
@@ -152,7 +154,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(12, 4, 10, 0.6);
+  background: rgba(60, 20, 40, 0.35);
   z-index: 89;
   backdrop-filter: blur(4px);
 }
@@ -169,11 +171,11 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     top: 0; right: -100%;
     width: min(320px, 80vw);
     height: 100svh;
-    background: var(--dark-2);
+    background: #fff8fb;
     padding: 6rem 2rem 2rem;
     transition: right var(--transition);
     z-index: 90;
-    border-left: 1px solid rgba(255,255,255,0.06);
+    border-left: 1px solid rgba(191, 78, 120, 0.1);
   }
 
   .nav.open { right: 0; }
@@ -184,8 +186,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     display: block;
     padding: 1.1rem 0;
     font-size: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    color: var(--text-light);
+    border-bottom: 1px solid rgba(191, 78, 120, 0.08);
+    color: rgba(60, 20, 40, 0.65);
   }
 
   .nav a::after { display: none; }

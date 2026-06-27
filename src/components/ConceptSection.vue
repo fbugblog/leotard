@@ -29,10 +29,10 @@ onMounted(() => {
       <div class="grid">
         <div class="headline-col fade-in" style="transition-delay:.1s">
           <h2 class="display-title">
-            娘のために作った<br>
-            <em>ひとつのレオタード</em>から
+            手仕事で生まれる、<br>
+            <em>あなただけの一枚</em>
           </h2>
-          <p class="accent-text">「この人に頼みたい」と感じてもらえる制作を目指して。</p>
+          <p class="accent-text">「この一枚を着て輝きたい」と思ってもらえる作品を目指して。</p>
 
           <div class="stats">
             <div class="stat" v-for="s in credentials" :key="s.num">
@@ -44,9 +44,9 @@ onMounted(() => {
 
         <div class="text-col fade-in" style="transition-delay:.2s">
           <p>
-            娘が新体操を始めたとき、大会で着るレオタードをどこで手に入れればいいか分からず、
-            市販のものではサイズも色も合わない。「それなら自分で作ろう」と思ったのが、
-            すべての始まりでした。
+            新体操は、音楽・表現・技術が一体となる特別なスポーツ。
+            その舞台で選手を彩るレオタードは、自信と美しさを引き立てる大切な存在です。
+            「この一枚を着て演技したい」そう感じてもらえる作品を、ひとつひとつ心を込めて制作しています。
           </p>
           <p>
             保育士として10年間、一人ひとり違う子どもたちと向き合ってきた経験が、

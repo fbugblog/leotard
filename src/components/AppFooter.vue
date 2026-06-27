@@ -85,8 +85,8 @@ function smooth(e, href) {
 
 <style scoped>
 .footer {
-  background: var(--dark);
-  border-top: 1px solid rgba(255,255,255,0.06);
+  background: #1E0812;
+  border-top: 1px solid rgba(191,78,120,0.12);
   padding-block: 4rem 2rem;
 }
 
