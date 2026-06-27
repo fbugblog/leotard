@@ -1,10 +1,11 @@
 <script setup>
 const navLinks = [
-  { href: '#concept',  label: 'コンセプト' },
-  { href: '#products', label: 'コレクション' },
-  { href: '#features', label: '特徴' },
-  { href: '#sns',      label: 'SNS' },
-  { href: '#contact',  label: 'お問い合わせ' },
+  { href: '#story',   label: '想い' },
+  { href: '#gallery', label: 'メニュー' },
+  { href: '#pricing', label: '料金' },
+  { href: '#process', label: '流れ' },
+  { href: '#faq',     label: 'FAQ' },
+  { href: '#contact', label: 'お問い合わせ' },
 ]
 
 const legalLinks = [

@@ -3,10 +3,10 @@ import { ref, onMounted } from 'vue'
 
 const sectionRef = ref(null)
 
-const stats = [
-  { num: '100+', label: 'カラーバリエーション' },
-  { num: '30日', label: '返品・交換保証' },
-  { num: '全国', label: '送料無料' },
+const credentials = [
+  { num: '150枚+', label: '制作実績' },
+  { num: '12年', label: 'ハンドメイド歴' },
+  { num: '5年', label: 'レオタード専門' },
 ]
 
 onMounted(() => {
@@ -19,44 +19,50 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="concept" class="concept section" ref="sectionRef">
+  <section id="story" class="story section" ref="sectionRef">
     <div class="container">
       <div class="header-row fade-in">
-        <span class="eyebrow">Our Concept</span>
+        <span class="eyebrow">制作への想い</span>
         <div class="divider" aria-hidden="true" />
       </div>
 
       <div class="grid">
         <div class="headline-col fade-in" style="transition-delay:.1s">
           <h2 class="display-title">
-            演技に宿る<br>
-            <em>美しさ</em>のために
+            娘のために作った<br>
+            <em>ひとつのレオタード</em>から
           </h2>
-          <p class="accent-text">新体操専門店として、競技者の「美」に向き合い続けます。</p>
+          <p class="accent-text">「この人に頼みたい」と感じてもらえる制作を目指して。</p>
+
+          <div class="stats">
+            <div class="stat" v-for="s in credentials" :key="s.num">
+              <span class="stat-num">{{ s.num }}</span>
+              <span class="stat-label">{{ s.label }}</span>
+            </div>
+          </div>
         </div>
 
         <div class="text-col fade-in" style="transition-delay:.2s">
           <p>
-            June BERRY は新体操に特化したレオタード専門店です。
-            採点競技において衣装は演技の一部――審判の目に映る美しさ、観客を惹きつける輝き、
-            そして選手自身が感じる自信のすべてが、レオタード一枚に宿っています。
+            娘が新体操を始めたとき、大会で着るレオタードをどこで手に入れればいいか分からず、
+            市販のものではサイズも色も合わない。「それなら自分で作ろう」と思ったのが、
+            すべての始まりでした。
           </p>
           <p>
-            私たちはバレエや体操とは異なる新体操ならではの動き――
-            リボン、ボール、フープ、クラブ、ロープ――を熟知したうえで、
-            どんな演技でも美しいシルエットを保てる設計をしています。
+            保育士として10年間、一人ひとり違う子どもたちと向き合ってきた経験が、
+            今の制作に生きています。体型・演技スタイル・チームカラー・選手の個性——
+            丁寧にヒアリングして、その人だけの一枚を仕上げることがこだわりです。
           </p>
           <p>
-            "June" は輝きと美しさが絶頂を迎える季節を、
-            "BERRY" は小さくても濃密な美しさを表しています。
-            どちらもあなたの演技に添えたい言葉です。
+            デザインから型紙・縫製・ストーン貼りまで、すべての工程を私一人で担当しています。
+            量産品にはできない、手仕事ならではの細やかさと温かさを大切にしています。
           </p>
 
-          <div class="stats">
-            <div class="stat" v-for="s in stats" :key="s.num">
-              <span class="stat-num">{{ s.num }}</span>
-              <span class="stat-label">{{ s.label }}</span>
-            </div>
+          <div class="badges">
+            <span class="badge">保育士資格保有</span>
+            <span class="badge">丁寧なヒアリング</span>
+            <span class="badge">全工程ひとりで制作</span>
+            <span class="badge">大会着用実績あり</span>
           </div>
         </div>
       </div>
@@ -67,7 +73,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.concept {
+.story {
   background: var(--cream);
   position: relative;
   overflow: hidden;
@@ -94,11 +100,11 @@ onMounted(() => {
 }
 
 .display-title {
-  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-size: clamp(2rem, 5vw, 3.4rem);
   font-weight: 300;
   color: var(--dark);
-  line-height: 1.15;
-  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
 }
 
 .display-title em {
@@ -108,9 +114,31 @@ onMounted(() => {
 
 .accent-text {
   font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-style: italic;
   color: var(--gold);
+  margin-bottom: 2.5rem;
+}
+
+.stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat { display: flex; flex-direction: column; gap: 0.2rem; }
+
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--purple);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted-dark);
 }
 
 .text-col p {
@@ -119,28 +147,23 @@ onMounted(() => {
   line-height: 1.9;
 }
 
-.stats {
+.badges {
   display: flex;
-  gap: 2.5rem;
-  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(7,4,14,0.08);
 }
 
-.stat { display: flex; flex-direction: column; gap: 0.2rem; }
-
-.stat-num {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--purple);
-  line-height: 1;
-}
-
-.stat-label {
+.badge {
   font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  color: var(--text-muted-dark);
+  letter-spacing: 0.05em;
+  padding: 0.3em 0.9em;
+  border-radius: 50px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  background: rgba(191, 78, 120, 0.06);
 }
 
 .bg-accent {
@@ -157,6 +180,6 @@ onMounted(() => {
 }
 
 @media (max-width: 480px) {
-  .stats { gap: 1.5rem; }
+  .stats { gap: 1.2rem; }
 }
 </style>

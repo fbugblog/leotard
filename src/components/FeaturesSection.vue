@@ -3,13 +3,54 @@ import { ref, onMounted } from 'vue'
 
 const sectionRef = ref(null)
 
-const features = [
-  { num: '01', title: '新体操専門の設計', desc: '種目特有の動き（リボン・ボール・フープ・クラブ・ロープ）を熟知した設計。どのポーズでも美しいシルエットを保ちます。' },
-  { num: '02', title: '国内職人による縫製', desc: '熟練の職人が一点一点丁寧に仕上げ。高い縫製精度で、激しい演技にも型崩れしません。' },
-  { num: '03', title: 'カスタムオーダー対応', desc: '生地・カラー・装飾・シルエットすべてをカスタマイズ可能。チームウェアの一括注文も承ります。' },
-  { num: '04', title: '豊富なサイズ展開', desc: 'ジュニア（90cm〜）から大人（3L）まで対応。カスタムサイズにも対応しているので、どんな体型の方にもフィットします。' },
-  { num: '05', title: '30日間保証', desc: 'サイズが合わない場合も安心。未使用品に限り購入から30日以内であれば無料で交換・返品対応します。' },
-  { num: '06', title: '全国送料無料', desc: '国内全域への送料は完全無料。大切な衣装を傷つけないよう、専用ボックスで丁寧にお届けします。' },
+const plans = [
+  {
+    tag: 'Full Order',
+    title: 'フルオーダー',
+    price: '¥35,000',
+    unit: '〜',
+    desc: 'デザイン・生地・装飾すべてを一から制作。大会・発表会・チームウェアに最適。',
+    includes: [
+      'デザインヒアリング（無料）',
+      '生地・カラー選定',
+      'ストーン・スパンコール装飾',
+      'カスタムサイズ対応',
+      'お見積り後確定',
+    ],
+    accent: '#7A1B4A',
+    featured: true,
+  },
+  {
+    tag: 'Remake',
+    title: 'リメイク',
+    price: '¥15,000',
+    unit: '〜',
+    desc: '今あるレオタードの補修・装飾追加・カラー変更など。思い出の一枚をよみがえらせます。',
+    includes: [
+      '状態確認・お見積り',
+      '補修・修繕',
+      '装飾追加・変更',
+      'サイズ調整',
+      '内容により変動あり',
+    ],
+    accent: '#BF4E78',
+    featured: false,
+  },
+  {
+    tag: 'Decoration',
+    title: '装飾追加のみ',
+    price: '¥8,000',
+    unit: '〜',
+    desc: 'お手持ちのレオタードへストーン・スパンコールを追加。手軽に華やかさをプラス。',
+    includes: [
+      'デザイン相談',
+      'ストーン・スパンコール貼り付け',
+      '着用イメージ確認',
+      '追加範囲により変動',
+    ],
+    accent: '#C2547A',
+    featured: false,
+  },
 ]
 
 onMounted(() => {
@@ -22,114 +63,168 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="features" class="features section" ref="sectionRef">
+  <section id="pricing" class="pricing section" ref="sectionRef">
     <div class="container">
-      <div class="top fade-in">
-        <span class="eyebrow" style="color: rgba(255,255,255,0.4)">Why June BERRY</span>
-        <h2 class="display-title" style="color: var(--champagne)">選ばれる理由</h2>
+      <div class="header fade-in">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.4)">Pricing</span>
+        <h2 class="display-title" style="color:var(--champagne)">料金の目安</h2>
+        <p class="header-note">
+          実際の金額はヒアリング後にお見積りします。まずはお気軽にご相談ください。
+        </p>
       </div>
 
-      <div class="grid">
+      <div class="plans">
         <div
-          v-for="(f, i) in features"
-          :key="f.num"
-          class="item fade-in"
-          :style="{ transitionDelay: `${i * 0.08}s` }"
+          v-for="(plan, i) in plans"
+          :key="plan.tag"
+          class="plan fade-in"
+          :class="{ featured: plan.featured }"
+          :style="{ transitionDelay: `${i * 0.12}s` }"
         >
-          <div class="item-top">
-            <span class="num">{{ f.num }}</span>
-            <div class="line" />
+          <div class="plan__top">
+            <span class="plan__tag" :style="{ color: plan.accent }">{{ plan.tag }}</span>
+            <h3 class="plan__title">{{ plan.title }}</h3>
+            <div class="plan__price">
+              <span class="plan__amount">{{ plan.price }}</span>
+              <span class="plan__unit">{{ plan.unit }}</span>
+            </div>
+            <p class="plan__desc">{{ plan.desc }}</p>
           </div>
-          <h3>{{ f.title }}</h3>
-          <p>{{ f.desc }}</p>
+          <ul class="plan__includes">
+            <li v-for="item in plan.includes" :key="item">
+              <span class="check" :style="{ color: plan.accent }">✓</span>
+              {{ item }}
+            </li>
+          </ul>
+          <div class="plan__badge" v-if="plan.featured">人気</div>
         </div>
       </div>
+
+      <p class="note fade-in">
+        ※ 価格はすべて税込・送料無料。チームウェアなど枚数が多い場合は別途ご相談ください。
+      </p>
     </div>
   </section>
 </template>
 
 <style scoped>
-.features {
+.pricing {
   background: var(--dark);
   position: relative;
-  overflow: hidden;
 }
 
-.features::before {
+.pricing::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  background: linear-gradient(to right, transparent, rgba(191,78,120,0.4), transparent);
 }
 
-.top { margin-bottom: 4rem; }
+.header { margin-bottom: 3.5rem; }
 
-.grid {
+.header-note {
+  margin-top: 0.8rem;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.8;
+}
+
+.plans {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.plan {
+  background: var(--dark-2);
+  border-radius: var(--radius);
+  padding: 2rem;
+  position: relative;
   border: 1px solid rgba(255,255,255,0.06);
+  transition: transform var(--transition), box-shadow var(--transition), opacity 0.75s var(--ease);
 }
 
-.item {
-  padding: 2.5rem;
-  border-right: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  transition: background var(--transition), opacity 0.75s var(--ease), transform 0.75s var(--ease);
+.plan:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
 }
 
-.item:hover { background: rgba(255,255,255,0.03); }
+.plan.featured { border-color: rgba(191,78,120,0.4); background: var(--dark-3); }
 
-.item:nth-child(3n) { border-right: none; }
-.item:nth-child(4), .item:nth-child(5), .item:nth-child(6) { border-bottom: none; }
-
-.item-top {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.2rem;
+.plan__tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.4rem;
 }
 
-.num {
+.plan__title {
   font-family: var(--font-serif);
   font-size: 1.4rem;
-  font-weight: 300;
-  color: var(--gold);
-  line-height: 1;
-}
-
-.line {
-  flex: 1;
-  height: 1px;
-  background: rgba(255,255,255,0.1);
-}
-
-.item h3 {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
   font-weight: 600;
   color: var(--champagne);
-  margin-bottom: 0.7rem;
+  margin-bottom: 1rem;
 }
 
-.item p {
-  font-size: 0.85rem;
+.plan__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2em;
+  margin-bottom: 0.8rem;
+}
+
+.plan__amount {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.plan__unit { font-size: 1rem; color: rgba(255,255,255,0.5); }
+
+.plan__desc {
+  font-size: 0.82rem;
   color: rgba(255,255,255,0.45);
-  line-height: 1.9;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.plan__includes { display: flex; flex-direction: column; gap: 0.55rem; }
+
+.plan__includes li {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.check { font-weight: 700; flex-shrink: 0; }
+
+.plan__badge {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: var(--gold);
+  color: var(--dark);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.25em 0.7em;
+  border-radius: 50px;
+}
+
+.note {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
 }
 
 @media (max-width: 900px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-  .item:nth-child(3n) { border-right: 1px solid rgba(255,255,255,0.06); }
-  .item:nth-child(2n) { border-right: none; }
-  .item:nth-child(5), .item:nth-child(6) { border-bottom: none; }
-  .item:nth-child(4) { border-bottom: 1px solid rgba(255,255,255,0.06); }
-}
-
-@media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr; }
-  .item { border-right: none; }
-  .item:last-child { border-bottom: none; }
+  .plans { grid-template-columns: 1fr; }
 }
 </style>
