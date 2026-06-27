@@ -64,7 +64,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .header.scrolled {
-  background: rgba(7, 4, 14, 0.92);
+  background: rgba(12, 4, 10, 0.92);
   backdrop-filter: blur(16px);
   box-shadow: 0 1px 0 rgba(255,255,255,0.06);
   padding: 0.9rem 0;
@@ -147,7 +147,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(7, 4, 14, 0.6);
+  background: rgba(12, 4, 10, 0.6);
   z-index: 89;
   backdrop-filter: blur(4px);
 }

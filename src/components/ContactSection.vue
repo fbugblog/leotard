@@ -71,7 +71,7 @@ function handleSubmit() {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(201, 162, 39, 0.4), transparent);
+  background: linear-gradient(to right, transparent, rgba(191, 78, 120, 0.4), transparent);
 }
 
 .inner {

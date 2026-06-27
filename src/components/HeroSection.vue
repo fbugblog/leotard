@@ -125,21 +125,21 @@ function particleStyle(n) {
 
 .orb-1 {
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(74, 27, 122, 0.6), transparent 70%);
+  background: radial-gradient(circle, rgba(122, 27, 74, 0.6), transparent 70%);
   top: -150px; right: -100px;
   animation: drift 12s ease-in-out infinite;
 }
 
 .orb-2 {
   width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(201, 162, 39, 0.2), transparent 70%);
+  background: radial-gradient(circle, rgba(191, 78, 120, 0.3), transparent 70%);
   bottom: -50px; left: -80px;
   animation: drift 10s ease-in-out infinite reverse;
 }
 
 .orb-3 {
   width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(194, 84, 122, 0.25), transparent 70%);
+  background: radial-gradient(circle, rgba(224, 139, 176, 0.35), transparent 70%);
   top: 30%; left: 20%;
   animation: drift 8s ease-in-out infinite;
 }

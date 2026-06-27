@@ -148,7 +148,7 @@ onMounted(() => {
   top: -80px; right: -120px;
   width: 500px; height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(74, 27, 122, 0.06), transparent 70%);
+  background: radial-gradient(circle, rgba(122, 27, 74, 0.08), transparent 70%);
   pointer-events: none;
 }
 

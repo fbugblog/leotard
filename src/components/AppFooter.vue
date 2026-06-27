@@ -161,7 +161,7 @@ function smooth(e, href) {
 .social-icon:not(.social-icon--disabled):hover {
   color: var(--gold);
   border-color: var(--gold);
-  background: rgba(201,162,39,0.08);
+  background: rgba(191,78,120,0.1);
 }
 
 .social-icon--disabled { opacity: 0.35; cursor: default; }
