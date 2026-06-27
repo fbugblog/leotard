@@ -3,144 +3,160 @@ import { ref, onMounted } from 'vue'
 
 const sectionRef = ref(null)
 
-const values = [
-  { title: '上質な素材', desc: 'ストレッチ性・通気性に優れた国産・輸入生地を厳選' },
-  { title: '美しいシルエット', desc: '体型に寄り添う立体裁断で、動きを美しく見せる' },
-  { title: '豊富なデザイン', desc: 'シンプルから華やかなステージ向けまで幅広くラインナップ' },
+const stats = [
+  { num: '100+', label: 'カラーバリエーション' },
+  { num: '30日', label: '返品・交換保証' },
+  { num: '全国', label: '送料無料' },
 ]
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } }),
-    { threshold: 0.12 }
+  const obs = new IntersectionObserver(
+    (es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } }),
+    { threshold: 0.1 }
   )
-  sectionRef.value?.querySelectorAll('.fade-in').forEach(el => observer.observe(el))
+  sectionRef.value?.querySelectorAll('.fade-in').forEach(el => obs.observe(el))
 })
 </script>
 
 <template>
   <section id="concept" class="concept section" ref="sectionRef">
     <div class="container">
+      <div class="header-row fade-in">
+        <span class="eyebrow">Our Concept</span>
+        <div class="divider" aria-hidden="true" />
+      </div>
+
       <div class="grid">
-        <div class="visual fade-in">
-          <div class="morph-shape">
-            <div class="inner-circle">
-              <span class="icon">🍒</span>
-            </div>
-          </div>
-          <div class="badge">Since 2024</div>
+        <div class="headline-col fade-in" style="transition-delay:.1s">
+          <h2 class="display-title">
+            演技に宿る<br>
+            <em>美しさ</em>のために
+          </h2>
+          <p class="accent-text">新体操専門店として、競技者の「美」に向き合い続けます。</p>
         </div>
 
-        <div class="text fade-in" style="transition-delay: 0.15s">
-          <p class="eyebrow">Our Concept</p>
-          <h2 class="section-title">踊る喜びを、<br>美しく纏う</h2>
-
-          <p class="lead">
-            June BERRY は、舞台に立つ一人ひとりの「美しさ」と「動きやすさ」を
-            同時に叶えるために生まれたレオタード専門店です。
+        <div class="text-col fade-in" style="transition-delay:.2s">
+          <p>
+            June BERRY は新体操に特化したレオタード専門店です。
+            採点競技において衣装は演技の一部――審判の目に映る美しさ、観客を惹きつける輝き、
+            そして選手自身が感じる自信のすべてが、レオタード一枚に宿っています。
           </p>
           <p>
-            バレリーナ、体操選手、フィットネス愛好家―それぞれのシーンに合わせた
-            素材選びと立体裁断により、着た瞬間から自信が生まれるウェアをお届けします。
+            私たちはバレエや体操とは異なる新体操ならではの動き――
+            リボン、ボール、フープ、クラブ、ロープ――を熟知したうえで、
+            どんな演技でも美しいシルエットを保てる設計をしています。
           </p>
           <p>
-            "June" は豊かさと美しさが溢れる季節を、"BERRY" は深みある色彩と
-            愛らしさを表しています。どちらもあなたの個性を輝かせるための言葉です。
+            "June" は輝きと美しさが絶頂を迎える季節を、
+            "BERRY" は小さくても濃密な美しさを表しています。
+            どちらもあなたの演技に添えたい言葉です。
           </p>
 
-          <ul class="values">
-            <li v-for="v in values" :key="v.title">
-              <span class="check">✦</span>
-              <span><strong>{{ v.title }}</strong>：{{ v.desc }}</span>
-            </li>
-          </ul>
+          <div class="stats">
+            <div class="stat" v-for="s in stats" :key="s.num">
+              <span class="stat-num">{{ s.num }}</span>
+              <span class="stat-label">{{ s.label }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="bg-accent" aria-hidden="true" />
   </section>
 </template>
 
 <style scoped>
-.concept { background: var(--white); }
+.concept {
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.divider {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+}
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 5rem;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
 }
 
-.visual { position: relative; }
-
-.morph-shape {
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 1;
-  margin-inline: auto;
-  border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
-  background: linear-gradient(135deg, var(--berry-pale) 0%, var(--pink) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: morph 8s ease-in-out infinite;
+.display-title {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 300;
+  color: var(--dark);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
 }
 
-@keyframes morph {
-  0%, 100% { border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%; }
-  33%       { border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%; }
-  66%       { border-radius: 50% 50% 30% 70% / 50% 70% 30% 50%; }
+.display-title em {
+  font-style: italic;
+  color: var(--purple);
 }
 
-.inner-circle {
-  width: 70%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-md);
+.accent-text {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--gold);
 }
 
-.icon { font-size: 5rem; line-height: 1; }
-
-.badge {
-  position: absolute;
-  bottom: 10%;
-  right: 5%;
-  background: var(--berry);
-  color: var(--white);
-  padding: 0.6em 1.2em;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  box-shadow: var(--shadow-md);
-}
-
-.text p { color: var(--text-muted); margin-bottom: 1rem; }
-
-.lead {
-  font-size: 1.05rem !important;
-  color: var(--text) !important;
-  font-weight: 400;
+.text-col p {
+  color: var(--text-muted-dark);
+  margin-bottom: 1.1rem;
   line-height: 1.9;
-  margin-bottom: 1.5rem !important;
 }
 
-.values {
-  margin-top: 2rem;
+.stats {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(7,4,14,0.08);
 }
 
-.values li { display: flex; gap: 0.8rem; align-items: flex-start; }
+.stat { display: flex; flex-direction: column; gap: 0.2rem; }
 
-.check { color: var(--berry-light); font-size: 0.85rem; margin-top: 0.3rem; flex-shrink: 0; }
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--purple);
+  line-height: 1;
+}
 
-@media (max-width: 768px) {
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted-dark);
+}
+
+.bg-accent {
+  position: absolute;
+  top: -80px; right: -120px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74, 27, 122, 0.06), transparent 70%);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
   .grid { grid-template-columns: 1fr; gap: 3rem; }
-  .visual { order: -1; }
-  .morph-shape { max-width: 280px; }
+}
+
+@media (max-width: 480px) {
+  .stats { gap: 1.5rem; }
 }
 </style>

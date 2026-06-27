@@ -5,75 +5,89 @@ const sectionRef = ref(null)
 
 const products = [
   {
-    id: 'ballet',
-    tag: 'Ballet Line',
-    title: 'バレエライン',
-    icon: '🩰',
-    bgClass: 'bg-ballet',
-    featured: false,
-    desc: 'クラシックな優雅さと現代的なデザインが融合。舞台映えするカッティングと、長時間のレッスンでも快適な伸縮素材を採用。ジュニアサイズから大人サイズまで対応。',
-    specs: ['素材：ナイロン85% / ポリウレタン15%', 'サイズ：90cm〜XL', 'カラー：20色以上'],
-  },
-  {
-    id: 'gym',
-    tag: 'Gymnastics Line',
-    title: '体操ライン',
-    icon: '🤸',
-    bgClass: 'bg-gym',
+    id: 'competition',
+    num: '01',
+    tag: 'Competition',
+    title: '競技用レオタード',
+    icon: '✨',
+    desc: '大会・発表会の舞台で輝くための一枚。ラインストーン・スパンコール・スウロフスキークリスタルを組み合わせた華やかな装飾と、激しい演技に耐える高強度素材を両立。照明を最大限に引き出すデザインで、採点競技での印象を高めます。',
+    specs: ['素材：マイクロファイバー + ラメ / スパンデックス混', 'サイズ：100cm〜LL / カスタムサイズ対応', '装飾：スワロフスキー・スパンコール・ラインストーン', 'カラー：オーダーカラー対応'],
+    accent: '#4A1B7A',
+    accentLight: '#E8D6F8',
     featured: true,
-    desc: '競技・演技の激しい動きに耐える高強度素材を使用。ラインストーンやスパンコールによる華やかな装飾で、採点競技での存在感を高めます。',
-    specs: ['素材：マイクロファイバー + ラメ素材', 'サイズ：100cm〜LL', 'カラー：オーダーカラー対応'],
   },
   {
-    id: 'fitness',
-    tag: 'Fitness Line',
-    title: 'フィットネスライン',
-    icon: '💪',
-    bgClass: 'bg-fitness',
+    id: 'practice',
+    num: '02',
+    tag: 'Practice',
+    title: '練習用レオタード',
+    icon: '🎀',
+    desc: '毎日のレッスンに寄り添う実用的な一枚。優れた伸縮性と耐久性で長時間の練習でも快適。豊富なカラーバリエーションで曜日や気分によって着替える楽しさも。洗濯耐性も考慮した素材を使用しています。',
+    specs: ['素材：ナイロン85% / ポリウレタン15%', 'サイズ：90cm〜XL', 'カラー：50色以上のベーシックカラー', '特長：速乾・型崩れしにくい設計'],
+    accent: '#C2547A',
+    accentLight: '#F5D6E4',
     featured: false,
-    desc: 'ヨガ・エアロビクス・ダンスフィットネスに最適。吸湿速乾素材で快適さをキープ。カジュアルに着こなせるスポーティなデザインから上品なスタイルまで揃えています。',
-    specs: ['素材：ポリエステル / スパンデックス混', 'サイズ：S〜3L（大きいサイズ対応）', 'カラー：季節限定カラーあり'],
+  },
+  {
+    id: 'custom',
+    num: '03',
+    tag: 'Custom Order',
+    title: 'オーダーメイド',
+    icon: '👑',
+    desc: 'チームウェアや個人の発表会衣装を一から制作。生地・カラー・装飾・シルエットまでご要望に合わせてデザイン。プロの衣装師がヒアリングから仕上げまで丁寧に対応します。団体・クラブのまとめ発注にも対応。',
+    specs: ['リードタイム：約4〜6週間', 'ロット：1枚から対応', '対応内容：デザイン・生地・装飾すべて選択可', '相談：無料オンライン相談あり'],
+    accent: '#C9A227',
+    accentLight: '#F5E6C8',
+    featured: false,
   },
 ]
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } }),
-    { threshold: 0.1 }
+  const obs = new IntersectionObserver(
+    (es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } }),
+    { threshold: 0.08 }
   )
-  sectionRef.value?.querySelectorAll('.fade-in').forEach(el => observer.observe(el))
+  sectionRef.value?.querySelectorAll('.fade-in').forEach(el => obs.observe(el))
 })
 </script>
 
 <template>
   <section id="products" class="products section" ref="sectionRef">
     <div class="container">
-      <p class="eyebrow center">Collections</p>
-      <h2 class="section-title center">コレクション</h2>
-      <p class="desc center">シーンと目的に合わせた3つのラインナップをご用意しています。</p>
+      <div class="section-header fade-in">
+        <span class="eyebrow">Collections</span>
+        <h2 class="display-title">新体操のための<br>3つのライン</h2>
+      </div>
 
-      <div class="grid">
+      <div class="list">
         <article
           v-for="(p, i) in products"
           :key="p.id"
-          class="card fade-in"
-          :class="{ 'card--featured': p.featured }"
+          class="item fade-in"
+          :class="{ featured: p.featured }"
           :style="{ transitionDelay: `${i * 0.12}s` }"
         >
-          <div class="card__badge" v-if="p.featured">人気 No.1</div>
+          <div class="item__num">{{ p.num }}</div>
 
-          <div class="card__visual" :class="p.bgClass">
-            <span class="card__icon">{{ p.icon }}</span>
+          <div class="item__icon-wrap" :style="{ background: p.accentLight }">
+            <span class="item__icon">{{ p.icon }}</span>
           </div>
 
-          <div class="card__body">
-            <span class="card__tag">{{ p.tag }}</span>
-            <h3 class="card__title">{{ p.title }}</h3>
-            <p class="card__desc">{{ p.desc }}</p>
-            <ul class="card__specs">
-              <li v-for="s in p.specs" :key="s">{{ s }}</li>
+          <div class="item__body">
+            <span class="item__tag" :style="{ color: p.accent }">{{ p.tag }}</span>
+            <h3 class="item__title">{{ p.title }}</h3>
+            <p class="item__desc">{{ p.desc }}</p>
+
+            <ul class="item__specs">
+              <li v-for="s in p.specs" :key="s">
+                <span class="spec-dot" :style="{ background: p.accent }" />
+                {{ s }}
+              </li>
             </ul>
           </div>
+
+          <div class="item__featured-badge" v-if="p.featured">人気 No.1</div>
+          <div class="item__border" :style="{ background: `linear-gradient(to bottom, ${p.accent}, transparent)` }" />
         </article>
       </div>
     </div>
@@ -81,139 +95,151 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.products { background: var(--ivory); }
+.products { background: var(--white); }
 
-.desc {
-  color: var(--text-muted);
-  max-width: 42ch;
-  margin-inline: auto;
-  margin-bottom: 3rem;
+.section-header {
+  margin-bottom: 4rem;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+.section-header .display-title {
+  margin-top: 0.5rem;
+  color: var(--dark);
 }
 
-.card {
-  background: var(--white);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition), box-shadow var(--transition), opacity 0.7s ease;
-  position: relative;
+.list {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
+.item {
+  display: grid;
+  grid-template-columns: 64px 120px 1fr;
+  gap: 0 2.5rem;
+  align-items: start;
+  padding: 2.5rem;
+  background: var(--cream);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), opacity 0.75s var(--ease);
 }
 
-.card--featured { border: 2px solid var(--berry-light); }
-
-.card__badge {
-  position: absolute;
-  top: 1rem; right: 1rem;
-  background: var(--berry);
-  color: var(--white);
-  font-size: 0.7rem;
-  padding: 0.3em 0.9em;
-  border-radius: 50px;
-  letter-spacing: 0.05em;
-  z-index: 1;
+.item:hover {
+  transform: translateX(6px);
+  box-shadow: var(--shadow-md);
 }
 
-.card__visual {
-  height: 200px;
+.item.featured {
+  background: var(--dark-2);
+}
+
+.item.featured .item__title { color: var(--champagne); }
+.item.featured .item__desc  { color: rgba(255,255,255,0.6); }
+.item.featured .item__specs li { color: rgba(255,255,255,0.55); }
+
+/* Number */
+.item__num {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 300;
+  color: rgba(7,4,14,0.12);
+  line-height: 1;
+  padding-top: 0.25rem;
+}
+
+.item.featured .item__num { color: rgba(255,255,255,0.08); }
+
+/* Icon wrap */
+.item__icon-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  position: relative;
+  flex-shrink: 0;
 }
 
-.bg-ballet  { background: linear-gradient(135deg, #F3D6E8 0%, #FAD2E8 100%); }
-.bg-gym     { background: linear-gradient(135deg, #E8D6F3 0%, #D2C4E8 100%); }
-.bg-fitness { background: linear-gradient(135deg, #D6E8F3 0%, #C4D8E8 100%); }
+.item__icon { font-size: 2.2rem; }
 
-.card__icon {
-  font-size: 4.5rem;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
-  transition: transform var(--transition);
-  line-height: 1;
-}
-
-.card:hover .card__icon { transform: scale(1.15) rotate(-5deg); }
-
-.card__body {
-  padding: 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.card__tag {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+/* Body */
+.item__tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--berry-light);
-  margin-bottom: 0.4rem;
+  font-weight: 500;
   display: block;
+  margin-bottom: 0.4rem;
 }
 
-.card__title {
+.item__title {
   font-family: var(--font-serif);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
-  color: var(--berry);
-  margin-bottom: 0.8rem;
+  color: var(--dark);
+  margin-bottom: 0.9rem;
 }
 
-.card__desc {
+.item__desc {
   font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.8;
-  margin-bottom: 1rem;
-  flex: 1;
+  color: var(--text-muted-dark);
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
 }
 
-.card__specs {
-  border-top: 1px solid var(--berry-pale);
-  padding-top: 1rem;
+.item__specs {
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
 }
 
-.card__specs li {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  padding-left: 1em;
-  position: relative;
+.item__specs li {
+  font-size: 0.78rem;
+  color: var(--text-muted-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.card__specs li::before {
-  content: '·';
+.spec-dot {
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Featured badge */
+.item__featured-badge {
   position: absolute;
-  left: 0;
-  color: var(--berry-light);
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--gold);
+  color: var(--dark);
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 0.3em 0.9em;
+  border-radius: 50px;
+  letter-spacing: 0.05em;
 }
 
-@media (max-width: 1024px) {
-  .grid { grid-template-columns: 1fr 1fr; }
-  .grid .card:last-child {
-    grid-column: span 2;
-    max-width: 480px;
-    width: 100%;
-    margin-inline: auto;
+/* Left accent border */
+.item__border {
+  position: absolute;
+  left: 0; top: 0;
+  width: 3px;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .item {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 2rem 1.5rem;
   }
-}
 
-@media (max-width: 640px) {
-  .grid { grid-template-columns: 1fr; }
-  .grid .card:last-child { grid-column: auto; max-width: none; }
+  .item__num { font-size: 2rem; }
+  .item__icon-wrap { width: 64px; height: 64px; }
+  .item__icon { font-size: 1.8rem; }
 }
 </style>

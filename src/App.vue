@@ -4,6 +4,7 @@ import HeroSection from './components/HeroSection.vue'
 import ConceptSection from './components/ConceptSection.vue'
 import ProductsSection from './components/ProductsSection.vue'
 import FeaturesSection from './components/FeaturesSection.vue'
+import SnsSection from './components/SnsSection.vue'
 import TestimonialsSection from './components/TestimonialsSection.vue'
 import ContactSection from './components/ContactSection.vue'
 import AppFooter from './components/AppFooter.vue'
@@ -16,6 +17,7 @@ import AppFooter from './components/AppFooter.vue'
     <ConceptSection />
     <ProductsSection />
     <FeaturesSection />
+    <SnsSection />
     <TestimonialsSection />
     <ContactSection />
   </main>

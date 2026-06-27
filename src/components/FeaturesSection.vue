@@ -4,38 +4,42 @@ import { ref, onMounted } from 'vue'
 const sectionRef = ref(null)
 
 const features = [
-  { icon: '🪡', title: '国内縫製・品質保証', desc: '熟練の職人による丁寧な縫製で、長く愛用できる耐久性を実現。全品に品質チェックを実施しています。' },
-  { icon: '🎨', title: 'カスタムオーダー対応', desc: '生地・カラー・デザインをご希望に合わせてカスタマイズ。チームや発表会の衣装としても対応可能です。' },
-  { icon: '📦', title: '丁寧なパッケージ', desc: 'ギフトにもぴったりな上品なボックスでお届け。大切な方へのプレゼントにも喜ばれています。' },
-  { icon: '💬', title: '専門スタッフによるサポート', desc: 'バレエ・体操経験者のスタッフが、サイズ選びや素材のご相談に丁寧にお答えします。' },
-  { icon: '🔄', title: '30日間返品・交換保証', desc: 'サイズが合わない場合も安心。購入から30日以内であれば、未使用品に限り無料で交換・返品対応します。' },
-  { icon: '✈️', title: '全国送料無料', desc: '国内全域への送料は一切かかりません。まとめ買いや定期購入でさらにお得な特典もご用意しています。' },
+  { num: '01', title: '新体操専門の設計', desc: '種目特有の動き（リボン・ボール・フープ・クラブ・ロープ）を熟知した設計。どのポーズでも美しいシルエットを保ちます。' },
+  { num: '02', title: '国内職人による縫製', desc: '熟練の職人が一点一点丁寧に仕上げ。高い縫製精度で、激しい演技にも型崩れしません。' },
+  { num: '03', title: 'カスタムオーダー対応', desc: '生地・カラー・装飾・シルエットすべてをカスタマイズ可能。チームウェアの一括注文も承ります。' },
+  { num: '04', title: '豊富なサイズ展開', desc: 'ジュニア（90cm〜）から大人（3L）まで対応。カスタムサイズにも対応しているので、どんな体型の方にもフィットします。' },
+  { num: '05', title: '30日間保証', desc: 'サイズが合わない場合も安心。未使用品に限り購入から30日以内であれば無料で交換・返品対応します。' },
+  { num: '06', title: '全国送料無料', desc: '国内全域への送料は完全無料。大切な衣装を傷つけないよう、専用ボックスで丁寧にお届けします。' },
 ]
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } }),
-    { threshold: 0.1 }
+  const obs = new IntersectionObserver(
+    (es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } }),
+    { threshold: 0.08 }
   )
-  sectionRef.value?.querySelectorAll('.fade-in').forEach(el => observer.observe(el))
+  sectionRef.value?.querySelectorAll('.fade-in').forEach(el => obs.observe(el))
 })
 </script>
 
 <template>
   <section id="features" class="features section" ref="sectionRef">
-    <div class="features-bg" aria-hidden="true"></div>
     <div class="container">
-      <p class="eyebrow center">Why June BERRY</p>
-      <h2 class="section-title center">選ばれる理由</h2>
+      <div class="top fade-in">
+        <span class="eyebrow" style="color: rgba(255,255,255,0.4)">Why June BERRY</span>
+        <h2 class="display-title" style="color: var(--champagne)">選ばれる理由</h2>
+      </div>
 
       <div class="grid">
         <div
           v-for="(f, i) in features"
-          :key="f.title"
+          :key="f.num"
           class="item fade-in"
           :style="{ transitionDelay: `${i * 0.08}s` }"
         >
-          <div class="item__icon">{{ f.icon }}</div>
+          <div class="item-top">
+            <span class="num">{{ f.num }}</span>
+            <div class="line" />
+          </div>
           <h3>{{ f.title }}</h3>
           <p>{{ f.desc }}</p>
         </div>
@@ -46,63 +50,86 @@ onMounted(() => {
 
 <style scoped>
 .features {
+  background: var(--dark);
   position: relative;
-  background: var(--white);
+  overflow: hidden;
 }
 
-.features-bg {
+.features::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(243, 214, 232, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 90% 80%, rgba(243, 214, 232, 0.2) 0%, transparent 50%);
-  pointer-events: none;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
 }
+
+.top { margin-bottom: 4rem; }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  position: relative;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .item {
-  text-align: center;
-  padding: 2rem 1.5rem;
-  border-radius: var(--radius);
-  background: var(--ivory);
-  transition: transform var(--transition), box-shadow var(--transition), opacity 0.7s ease;
+  padding: 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background var(--transition), opacity 0.75s var(--ease), transform 0.75s var(--ease);
 }
 
-.item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+.item:hover { background: rgba(255,255,255,0.03); }
+
+.item:nth-child(3n) { border-right: none; }
+.item:nth-child(4), .item:nth-child(5), .item:nth-child(6) { border-bottom: none; }
+
+.item-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
 }
 
-.item__icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.num {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
 }
 
 .item h3 {
   font-family: var(--font-serif);
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--berry);
-  margin-bottom: 0.8rem;
+  color: var(--champagne);
+  margin-bottom: 0.7rem;
 }
 
 .item p {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.8;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.9;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
+  .item:nth-child(3n) { border-right: 1px solid rgba(255,255,255,0.06); }
+  .item:nth-child(2n) { border-right: none; }
+  .item:nth-child(5), .item:nth-child(6) { border-bottom: none; }
+  .item:nth-child(4) { border-bottom: 1px solid rgba(255,255,255,0.06); }
 }
 
-@media (max-width: 640px) {
-  .grid { grid-template-columns: 1fr; gap: 1.2rem; }
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+  .item { border-right: none; }
+  .item:last-child { border-bottom: none; }
 }
 </style>
