@@ -3,183 +3,271 @@ import { ref, onMounted } from 'vue'
 
 const sectionRef = ref(null)
 
-const credentials = [
-  { num: '150枚+', label: '制作実績' },
-  { num: '12年', label: 'ハンドメイド歴' },
-  { num: '5年', label: 'レオタード専門' },
+const pillars = [
+  { num: '01', title: '技術と美しさ', desc: '正しい技術と美しい動きは表裏一体。基礎から丁寧に、本物の動きを学びます。' },
+  { num: '02', title: '一人ひとりに寄り添う', desc: '少人数制で、各生徒の個性と目標に合わせたオーダーメイドの指導を大切にしています。' },
+  { num: '03', title: '楽しく続けられる', desc: '通うことが楽しくなる雰囲気づくりを最優先に、長く続けられる環境を整えています。' },
 ]
 
 onMounted(() => {
   const obs = new IntersectionObserver(
-    (es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } }),
-    { threshold: 0.1 }
+    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } }),
+    { threshold: 0.12 }
   )
-  sectionRef.value?.querySelectorAll('.fade-in').forEach(el => obs.observe(el))
+  sectionRef.value?.querySelectorAll('.scroll-in').forEach(el => obs.observe(el))
 })
 </script>
 
 <template>
-  <section id="story" class="story section" ref="sectionRef">
+  <section id="concept" class="concept section" ref="sectionRef">
     <div class="container">
-      <div class="header-row fade-in">
-        <span class="eyebrow">制作への想い</span>
-        <div class="divider" aria-hidden="true" />
-      </div>
 
-      <div class="grid">
-        <div class="headline-col fade-in" style="transition-delay:.1s">
-          <h2 class="display-title">
-            手仕事で生まれる、<br>
-            <em>あなただけの一枚</em>
+      <!-- Header row with large section number -->
+      <div class="header-row scroll-in">
+        <div class="header-num" aria-hidden="true">01</div>
+        <div class="header-info">
+          <span class="eyebrow">CONCEPT</span>
+          <h2 class="concept-title">
+            <span class="title-reg">体を動かす喜びと、</span>
+            <em class="title-em">美しさを追求する。</em>
           </h2>
-          <p class="accent-text">「この一枚を着て輝きたい」と思ってもらえる作品を目指して。</p>
-
-          <div class="stats">
-            <div class="stat" v-for="s in credentials" :key="s.num">
-              <span class="stat-num">{{ s.num }}</span>
-              <span class="stat-label">{{ s.label }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-col fade-in" style="transition-delay:.2s">
-          <p>
-            新体操は、音楽・表現・技術が一体となる特別なスポーツ。
-            その舞台で選手を彩るレオタードは、自信と美しさを引き立てる大切な存在です。
-            「この一枚を着て演技したい」そう感じてもらえる作品を、ひとつひとつ心を込めて制作しています。
-          </p>
-          <p>
-            保育士として10年間、一人ひとり違う子どもたちと向き合ってきた経験が、
-            今の制作に生きています。体型・演技スタイル・チームカラー・選手の個性——
-            丁寧にヒアリングして、その人だけの一枚を仕上げることがこだわりです。
-          </p>
-          <p>
-            デザインから型紙・縫製・ストーン貼りまで、すべての工程を私一人で担当しています。
-            量産品にはできない、手仕事ならではの細やかさと温かさを大切にしています。
-          </p>
-
-          <div class="badges">
-            <span class="badge">保育士資格保有</span>
-            <span class="badge">丁寧なヒアリング</span>
-            <span class="badge">全工程ひとりで制作</span>
-            <span class="badge">大会着用実績あり</span>
-          </div>
         </div>
       </div>
-    </div>
 
-    <div class="bg-accent" aria-hidden="true" />
+      <!-- Main body -->
+      <div class="body-grid">
+        <div class="body-text scroll-in" style="transition-delay:.08s">
+          <p>
+            GRACE STUDIOは、新体操とボディメイキングを組み合わせた新しいタイプのスタジオです。
+            子どもから大人まで、それぞれのペースで「動く喜び」を体験していただけます。
+          </p>
+          <p>
+            新体操で培われる柔軟性・リズム感・表現力は、日常の体の使い方を根本から変えます。
+            ボディメイキングと組み合わせることで、美しい姿勢と引き締まった体をつくることができます。
+          </p>
+          <p>
+            コーチ歴15年・国際大会経験を持つインストラクターが、基礎から丁寧に、楽しく指導します。
+          </p>
+        </div>
+
+        <!-- Dark decorative block -->
+        <div class="deco-block scroll-in" style="transition-delay:.16s" aria-hidden="true">
+          <div class="deco-words">
+            <span class="deco-w deco-w-dim">MOVE</span>
+            <span class="deco-w deco-w-pink">GRACE</span>
+            <span class="deco-w deco-w-dim">GROW</span>
+          </div>
+          <div class="deco-badge">
+            <span class="badge-sub">体験レッスン</span>
+            <strong class="badge-main">受付中</strong>
+          </div>
+          <div class="deco-ring" />
+        </div>
+      </div>
+
+      <!-- 3-pillar grid -->
+      <div class="pillars">
+        <div
+          v-for="(p, i) in pillars"
+          :key="p.num"
+          class="pillar scroll-in"
+          :style="{ transitionDelay: `${0.05 + i * 0.1}s` }"
+        >
+          <span class="pillar-num" aria-hidden="true">{{ p.num }}</span>
+          <h3 class="pillar-title">{{ p.title }}</h3>
+          <p class="pillar-desc">{{ p.desc }}</p>
+        </div>
+      </div>
+
+    </div>
   </section>
 </template>
 
 <style scoped>
-.story {
-  background: var(--cream);
-  position: relative;
-  overflow: hidden;
+.concept {
+  background: var(--body-bg);
 }
 
+/* Header row */
 .header-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.5rem;
+  align-items: end;
+  margin-bottom: 5rem;
+}
+
+.header-num {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 12vw, 9rem);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--border-mid);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  user-select: none;
+  padding-bottom: 0.2em;
+}
+
+.concept-title {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 4rem;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
-.divider {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, var(--gold), transparent);
+.title-reg {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 300;
+  color: var(--text-mid);
 }
 
-.grid {
+.title-em {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--pink);
+}
+
+/* Body grid */
+.body-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+  gap: 4rem;
   align-items: start;
+  margin-bottom: 5rem;
 }
 
-.display-title {
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  font-weight: 300;
-  color: var(--dark);
-  line-height: 1.2;
+.body-text p {
+  color: var(--text-mid);
+  line-height: 2;
+  font-size: 0.94rem;
   margin-bottom: 1.2rem;
 }
 
-.display-title em {
-  font-style: italic;
-  color: var(--purple);
-}
+.body-text p:last-child { margin-bottom: 0; }
 
-.accent-text {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-style: italic;
-  color: var(--gold);
-  margin-bottom: 2.5rem;
-}
-
-.stats {
+/* Deco block */
+.deco-block {
+  position: relative;
+  background: var(--charcoal);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/3;
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.stat { display: flex; flex-direction: column; gap: 0.2rem; }
+.deco-words {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  z-index: 1;
+}
 
-.stat-num {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--purple);
+.deco-w {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
   line-height: 1;
 }
 
-.stat-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  color: var(--text-muted-dark);
-}
+.deco-w-dim  { color: rgba(255, 255, 255, 0.1); }
+.deco-w-pink { color: var(--pink); }
 
-.text-col p {
-  color: var(--text-muted-dark);
-  margin-bottom: 1.1rem;
-  line-height: 1.9;
-}
-
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(7,4,14,0.08);
-}
-
-.badge {
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
-  padding: 0.3em 0.9em;
-  border-radius: 50px;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  background: rgba(191, 78, 120, 0.06);
-}
-
-.bg-accent {
+.deco-badge {
   position: absolute;
-  top: -80px; right: -120px;
-  width: 500px; height: 500px;
+  bottom: 1.5rem; right: 1.5rem;
+  background: var(--pink);
+  color: var(--surface);
+  padding: 0.65em 1.2em;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+  z-index: 2;
+}
+
+.badge-sub {
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+
+.badge-main {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.deco-ring {
+  position: absolute;
+  top: -40px; left: -40px;
+  width: 200px; height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(122, 27, 74, 0.08), transparent 70%);
-  pointer-events: none;
+  border: 1.5px solid rgba(240, 78, 132, 0.15);
 }
 
+/* Pillars */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+  background: var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+}
+
+.pillar {
+  background: var(--surface);
+  padding: 2.5rem 2rem;
+  transition: background var(--transition),
+              opacity 0.85s var(--ease), transform 0.85s var(--ease);
+}
+
+.pillar:hover { background: var(--pink-50); }
+
+.pillar-num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--pink-200);
+  display: block;
+  margin-bottom: 1rem;
+  line-height: 1;
+  transition: -webkit-text-stroke-color var(--transition);
+}
+
+.pillar:hover .pillar-num { -webkit-text-stroke-color: var(--pink); }
+
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+
+.pillar-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+
+/* Responsive */
 @media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; gap: 3rem; }
-}
-
-@media (max-width: 480px) {
-  .stats { gap: 1.2rem; }
+  .header-row { grid-template-columns: 1fr; gap: 1rem; }
+  .header-num { font-size: 4rem; }
+  .body-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .pillars { grid-template-columns: 1fr; }
 }
 </style>

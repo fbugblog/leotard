@@ -3,228 +3,191 @@ import { ref, onMounted } from 'vue'
 
 const sectionRef = ref(null)
 
-const plans = [
+const features = [
   {
-    tag: 'Full Order',
-    title: 'フルオーダー',
-    price: '¥35,000',
-    unit: '〜',
-    desc: 'デザイン・生地・装飾すべてを一から制作。大会・発表会・チームウェアに最適。',
-    includes: [
-      'デザインヒアリング（無料）',
-      '生地・カラー選定',
-      'ストーン・スパンコール装飾',
-      'カスタムサイズ対応',
-      'お見積り後確定',
-    ],
-    accent: '#7A1B4A',
-    featured: true,
+    num: '01',
+    icon: '👥',
+    title: '少人数制',
+    desc: '1クラス最大8名の少人数制。一人ひとりの動きを丁寧に確認し、個別フィードバックを行います。',
+    dark: true,
   },
   {
-    tag: 'Remake',
-    title: 'リメイク',
-    price: '¥15,000',
-    unit: '〜',
-    desc: '今あるレオタードの補修・装飾追加・カラー変更など。思い出の一枚をよみがえらせます。',
-    includes: [
-      '状態確認・お見積り',
-      '補修・修繕',
-      '装飾追加・変更',
-      'サイズ調整',
-      '内容により変動あり',
-    ],
-    accent: '#BF4E78',
-    featured: false,
+    num: '02',
+    icon: '🏆',
+    title: 'プロ指導',
+    desc: '国際大会出場経験のあるコーチが直接指導。本物の技術と美しさを丁寧にお伝えします。',
+    dark: false,
   },
   {
-    tag: 'Decoration',
-    title: '装飾追加のみ',
-    price: '¥8,000',
-    unit: '〜',
-    desc: 'お手持ちのレオタードへストーン・スパンコールを追加。手軽に華やかさをプラス。',
-    includes: [
-      'デザイン相談',
-      'ストーン・スパンコール貼り付け',
-      '着用イメージ確認',
-      '追加範囲により変動',
-    ],
-    accent: '#C2547A',
-    featured: false,
+    num: '03',
+    icon: '🌸',
+    title: '全年齢対応',
+    desc: '3歳の子どもから大人まで対応。ご家族で一緒に通っていただけます。',
+    dark: false,
+  },
+  {
+    num: '04',
+    icon: '✨',
+    title: '本格設備',
+    desc: '専用フロア・全面鏡張りスタジオ・プロ仕様の手具など、本格的な練習環境を完備しています。',
+    dark: true,
   },
 ]
 
 onMounted(() => {
   const obs = new IntersectionObserver(
-    (es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } }),
-    { threshold: 0.08 }
+    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } }),
+    { threshold: 0.1 }
   )
-  sectionRef.value?.querySelectorAll('.fade-in').forEach(el => obs.observe(el))
+  sectionRef.value?.querySelectorAll('.scroll-in').forEach(el => obs.observe(el))
 })
 </script>
 
 <template>
-  <section id="pricing" class="pricing section" ref="sectionRef">
+  <section id="features" class="features section" ref="sectionRef">
     <div class="container">
-      <div class="header fade-in">
-        <span class="eyebrow" style="color:rgba(255,255,255,0.4)">Pricing</span>
-        <h2 class="display-title" style="color:var(--champagne)">料金の目安</h2>
-        <p class="header-note">
-          実際の金額はヒアリング後にお見積りします。まずはお気軽にご相談ください。
-        </p>
+
+      <div class="section-head scroll-in">
+        <div class="head-inner">
+          <span class="eyebrow">FEATURES</span>
+          <h2 class="display-title">GRACEが選ばれる理由</h2>
+        </div>
+        <div class="head-num" aria-hidden="true">04</div>
       </div>
 
-      <div class="plans">
+      <div class="bento">
         <div
-          v-for="(plan, i) in plans"
-          :key="plan.tag"
-          class="plan fade-in"
-          :class="{ featured: plan.featured }"
-          :style="{ transitionDelay: `${i * 0.12}s` }"
+          v-for="(f, i) in features"
+          :key="f.num"
+          class="cell scroll-in"
+          :class="{ 'cell--dark': f.dark }"
+          :style="{ transitionDelay: `${i * 0.1}s` }"
         >
-          <div class="plan__top">
-            <span class="plan__tag" :style="{ color: plan.accent }">{{ plan.tag }}</span>
-            <h3 class="plan__title">{{ plan.title }}</h3>
-            <div class="plan__price">
-              <span class="plan__amount">{{ plan.price }}</span>
-              <span class="plan__unit">{{ plan.unit }}</span>
-            </div>
-            <p class="plan__desc">{{ plan.desc }}</p>
-          </div>
-          <ul class="plan__includes">
-            <li v-for="item in plan.includes" :key="item">
-              <span class="check" :style="{ color: plan.accent }">✓</span>
-              {{ item }}
-            </li>
-          </ul>
-          <div class="plan__badge" v-if="plan.featured">人気</div>
+          <div class="cell-bg-num" aria-hidden="true">{{ f.num }}</div>
+          <div class="cell-icon">{{ f.icon }}</div>
+          <h3 class="cell-title">{{ f.title }}</h3>
+          <p class="cell-desc">{{ f.desc }}</p>
         </div>
       </div>
 
-      <p class="note fade-in">
-        ※ 価格はすべて税込・送料無料。チームウェアなど枚数が多い場合は別途ご相談ください。
-      </p>
     </div>
   </section>
 </template>
 
 <style scoped>
-.pricing {
-  background: var(--dark);
-  position: relative;
-}
+.features { background: var(--body-bg); }
 
-.pricing::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(191,78,120,0.4), transparent);
-}
-
-.header { margin-bottom: 3.5rem; }
-
-.header-note {
-  margin-top: 0.8rem;
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.4);
-  line-height: 1.8;
-}
-
-.plans {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.plan {
-  background: var(--dark-2);
-  border-radius: var(--radius);
-  padding: 2rem;
-  position: relative;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: transform var(--transition), box-shadow var(--transition), opacity 0.75s var(--ease);
-}
-
-.plan:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
-}
-
-.plan.featured { border-color: rgba(191,78,120,0.4); background: var(--dark-3); }
-
-.plan__tag {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 500;
-  display: block;
-  margin-bottom: 0.4rem;
-}
-
-.plan__title {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--champagne);
-  margin-bottom: 1rem;
-}
-
-.plan__price {
+/* Section head */
+.section-head {
   display: flex;
-  align-items: baseline;
-  gap: 0.2em;
-  margin-bottom: 0.8rem;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+  gap: 2rem;
 }
 
-.plan__amount {
-  font-family: var(--font-serif);
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: var(--white);
-}
-
-.plan__unit { font-size: 1rem; color: rgba(255,255,255,0.5); }
-
-.plan__desc {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-.plan__includes { display: flex; flex-direction: column; gap: 0.55rem; }
-
-.plan__includes li {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.55);
+.head-inner {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-.check { font-weight: 700; flex-shrink: 0; }
+.head-inner .display-title { color: var(--text); }
 
-.plan__badge {
+.head-num {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--border-mid);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Bento grid */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.cell {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  transition: transform var(--transition), box-shadow var(--transition),
+              opacity 0.85s var(--ease), transform 0.85s var(--ease);
+}
+
+.cell:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.cell--dark {
+  background: var(--charcoal);
+  border-color: transparent;
+}
+
+.cell--dark:hover {
+  box-shadow: 0 12px 40px rgba(22, 12, 20, 0.3);
+}
+
+/* Background number */
+.cell-bg-num {
   position: absolute;
-  top: 1rem; right: 1rem;
-  background: var(--gold);
-  color: var(--dark);
-  font-size: 0.65rem;
-  font-weight: 600;
-  padding: 0.25em 0.7em;
-  border-radius: 50px;
+  bottom: -0.8rem; right: 0.8rem;
+  font-family: var(--font-display);
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1.5px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
 }
 
-.note {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.3);
-  text-align: center;
+.cell:not(.cell--dark) .cell-bg-num { -webkit-text-stroke-color: var(--border); }
+.cell--dark .cell-bg-num { -webkit-text-stroke-color: rgba(255, 255, 255, 0.08); }
+
+/* Cell content */
+.cell-icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 1.2rem;
 }
 
-@media (max-width: 900px) {
-  .plans { grid-template-columns: 1fr; }
+.cell-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.cell:not(.cell--dark) .cell-title { color: var(--text); }
+.cell--dark .cell-title { color: var(--surface); }
+
+.cell-desc {
+  font-size: 0.82rem;
+  line-height: 1.85;
+}
+
+.cell:not(.cell--dark) .cell-desc { color: var(--text-muted); }
+.cell--dark .cell-desc { color: rgba(255, 255, 255, 0.45); }
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .bento { grid-template-columns: 1fr; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+  .head-num { font-size: 3.5rem; }
 }
 </style>
