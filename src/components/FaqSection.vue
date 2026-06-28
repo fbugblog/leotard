@@ -68,7 +68,7 @@ onMounted(() => {
             <span>{{ faq.q }}</span>
             <span class="item__icon" aria-hidden="true">{{ openIndex === i ? '−' : '+' }}</span>
           </button>
-          <div class="item__a" v-show="openIndex === i">
+          <div class="item__a">
             <p>{{ faq.a }}</p>
           </div>
         </div>
@@ -96,7 +96,6 @@ onMounted(() => {
 
 .item {
   border-bottom: 1px solid rgba(7,4,14,0.08);
-  transition: opacity 0.75s var(--ease);
 }
 
 .item:first-child { border-top: 1px solid rgba(7,4,14,0.08); }
@@ -134,6 +133,14 @@ onMounted(() => {
 }
 
 .item__a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+  padding-bottom: 0;
+}
+
+.item.open .item__a {
+  max-height: 300px;
   padding-bottom: 1.4rem;
 }
 
